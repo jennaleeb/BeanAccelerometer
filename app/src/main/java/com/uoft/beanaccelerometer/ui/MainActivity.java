@@ -1,4 +1,4 @@
-package com.uoft.beanaccelerometer;
+package com.uoft.beanaccelerometer.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +15,7 @@ import com.punchthrough.bean.sdk.message.Acceleration;
 import com.punchthrough.bean.sdk.message.BeanError;
 import com.punchthrough.bean.sdk.message.Callback;
 import com.punchthrough.bean.sdk.message.ScratchBank;
+import com.uoft.beanaccelerometer.R;
 
 public class MainActivity extends AppCompatActivity {
 
