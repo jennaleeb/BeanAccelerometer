@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 disconnectBean();
                 mConnectStatus.setText("Bean Disconnected");
+                mBeanName.setText("Bean Name?");
+                xValueText.setText("0.00");
+                yValueText.setText("0.00");
+                zValueText.setText("0.00");
             }
         });
 
@@ -112,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onDisconnected() {
-            mConnectStatus.setText("Disconnected");
+
         }
 
         @Override
