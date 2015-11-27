@@ -8,91 +8,170 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BEAN NAME?"
-        android:id="@+id/textViewBeanName"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CONNECTIVITY STATUS"
-        android:id="@+id/textViewConnectStatus"
-        android:layout_alignTop="@+id/textViewBeanName"
-        android:layout_alignParentEnd="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0.00"
-        android:id="@+id/xValueText"
-        android:layout_above="@+id/yValueText"
-        android:layout_alignStart="@+id/yValueText"
-        android:layout_marginBottom="81dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0.00"
-        android:id="@+id/yValueText"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0.00"
-        android:id="@+id/zValueText"
-        android:layout_above="@+id/connectBeanButton"
-        android:layout_alignStart="@+id/yValueText"
-        android:layout_marginBottom="108dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connect Bean"
-        android:id="@+id/connectBeanButton"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
 
-    <Button
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingRight="2sp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Connect Bean"
+                android:id="@+id/connectBeanButton"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:textSize="16sp"
+                android:background="#51b46d"
+                android:textColor="#80ffffff"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="2sp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Disconnect Bean"
+                android:id="@+id/disconnectBeanButton"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:textSize="16sp"
+                android:textColor="#80FFFFFF"
+                android:background="#e15258"
+                android:allowUndo="true"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Disconnect Bean"
-        android:id="@+id/disconnectBeanButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="false"
+        android:layout_marginBottom="5dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="X:"
+                android:id="@+id/textView"
+                android:layout_alignBottom="@+id/xValueText"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="0.0"
+                android:id="@+id/xValueText"
+                android:layout_above="@+id/yValueText"
+                android:layout_alignStart="@+id/yValueText"
+                android:layout_gravity="center"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Y:"
+                android:id="@+id/textView2"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="0.0"
+                android:id="@+id/yValueText"
+                android:layout_alignTop="@+id/textView2"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Z:"
+                android:id="@+id/textView3"
+                android:layout_alignBottom="@+id/zValueText"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="0.0"
+                android:id="@+id/zValueText"
+                android:layout_above="@+id/connectBeanButton"
+                android:layout_alignStart="@+id/yValueText"
+                android:layout_gravity="center"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="X:"
-        android:id="@+id/textView"
-        android:layout_alignBottom="@+id/xValueText"
-        android:layout_alignParentStart="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Y:"
-        android:id="@+id/textView2"
+        android:text="0"
+        android:id="@+id/stepCountText"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_centerHorizontal="true"
+        android:textSize="104sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Z:"
-        android:id="@+id/textView3"
-        android:layout_alignBottom="@+id/zValueText"
-        android:layout_alignParentStart="true"/>
+        android:text="steps"
+        android:id="@+id/textView5"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/stepCountText"
+        />
 </RelativeLayout>

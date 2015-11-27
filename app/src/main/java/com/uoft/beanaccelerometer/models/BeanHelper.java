@@ -23,13 +23,36 @@ public class BeanHelper extends Application {
     Handler mHandler;
     Runnable mPollAccelerationRunnable;
 
-    double xValue;
-    double yValue;
-    double zValue;
-    String mBeanName;
-    String mConnectStatus;
+    private double xValue;
+    private double yValue;
+    private double zValue;
+    private double pValue;
+    private double threshold;
+
+    private double xPreviousValue;
+    private double yPreviousValue;
+    private double zPreviousValue;
+    private double pPreviousValue;
+
+
     Context mContext;
     String mAddress;
+
+    StepCounter mStepCounter;
+
+
+    public BeanHelper(StepCounter stepCounter){
+        mStepCounter = stepCounter;
+
+        // intialize variables
+
+        // TODO: play with this threshold
+        threshold = 0.05;
+        xPreviousValue = 0.0;
+        yPreviousValue = 0.0;
+        zPreviousValue = 0.0;
+        pPreviousValue = 0.0;
+    }
 
     public void connectBean() {
         mContext = this;
@@ -43,7 +66,6 @@ public class BeanHelper extends Application {
             @Override
             public void onDiscoveryComplete() {
 
-                setBeanName(mBean.getDevice().getName());
                 mBean.connect(mContext, beanListener);
                 mAddress = mBean.getDevice().getAddress();
                 Log.i("Address:", mAddress+"");
@@ -60,7 +82,6 @@ public class BeanHelper extends Application {
     BeanListener beanListener = new BeanListener() {
         @Override
         public void onConnected() {
-            setConnectStatus("connected to Bean!");
 
             mHandler = new Handler();
             mPollAccelerationRunnable = new Runnable() {
@@ -106,10 +127,29 @@ public class BeanHelper extends Application {
         mBean.readAcceleration(new Callback<Acceleration>() {
             @Override
             public void onResult(Acceleration result) {
-                // do something with the result
-                setxValue(result.x());
-                setyValue(result.y());
-                setzValue(result.z());
+                // do something with the result (for view, delete later)
+//                setxValue(result.x());
+//                setyValue(result.y());
+//                setzValue(result.z());
+
+                xValue = result.x();
+                yValue = result.y();
+                zValue = result.z();
+
+                pValue = Math.sqrt(xValue*xValue + yValue*yValue + zValue*zValue);
+
+                if (Math.abs(yValue - yPreviousValue) > threshold && Math.abs(pValue - pPreviousValue) > threshold) {
+                    stepCount++;
+                    mStepCounter.setStepCount(stepCount);
+                    Log.i("step count: ", stepCount + "");
+                }
+
+                xPreviousValue = xValue;
+                yPreviousValue = yValue;
+                zPreviousValue = zValue;
+                pPreviousValue = pValue;
+
+
 
                 //and schedule another call
                 mHandler.postDelayed(mPollAccelerationRunnable, 250);
@@ -117,6 +157,8 @@ public class BeanHelper extends Application {
             }
         });
     }
+    int stepCount = 0;
+
 
     public double getxValue() {
         return xValue;
@@ -142,19 +184,4 @@ public class BeanHelper extends Application {
         this.zValue = zValue;
     }
 
-    public String getBeanName() {
-        return mBeanName;
-    }
-
-    public void setBeanName(String beanName) {
-        mBeanName = beanName;
-    }
-
-    public String getConnectStatus() {
-        return mConnectStatus;
-    }
-
-    public void setConnectStatus(String connectStatus) {
-        mConnectStatus = connectStatus;
-    }
 }

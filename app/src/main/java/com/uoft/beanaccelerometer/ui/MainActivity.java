@@ -9,18 +9,19 @@ import android.widget.TextView;
 
 import com.uoft.beanaccelerometer.R;
 import com.uoft.beanaccelerometer.models.BeanHelper;
+import com.uoft.beanaccelerometer.models.StepCounter;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView mBeanNameText;
-    TextView mConnectStatusText;
     TextView xValueText;
     TextView yValueText;
     TextView zValueText;
+    TextView stepCountText;
 
     Button mConnectBeanButton;
     Button mDisconnectBeanButton;
     BeanHelper mBeanHelper;
+    StepCounter mStepCounter;
 
     Boolean mIsBeanOn = false;
     final Handler mHandler = new Handler();
@@ -31,14 +32,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mBeanNameText = (TextView) findViewById(R.id.textViewBeanName);
-        mConnectStatusText = (TextView) findViewById(R.id.textViewConnectStatus);
         xValueText = (TextView) findViewById(R.id.xValueText);
         yValueText = (TextView) findViewById(R.id.yValueText);
         zValueText = (TextView) findViewById(R.id.zValueText);
+        stepCountText = (TextView) findViewById(R.id.stepCountText);
+
         mConnectBeanButton = (Button) findViewById(R.id.connectBeanButton);
         mDisconnectBeanButton = (Button) findViewById(R.id.disconnectBeanButton);
-        mBeanHelper = new BeanHelper();
+
+        mStepCounter = new StepCounter();
+        mBeanHelper = new BeanHelper(mStepCounter);
 
 
 
@@ -50,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
                 mBeanHelper.connectBean();
 
-                mBeanNameText.setText(mBeanHelper.getBeanName());
-                mConnectStatusText.setText(mBeanHelper.getConnectStatus());
 
                 updateUI();
 
@@ -67,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 mBeanHelper.disconnectBean();
                 mIsBeanOn = false;
 
-                mConnectStatusText.setText("Bean Disconnected");
-                mBeanNameText.setText("Bean Name?");
 
                 // TODO: Values not going back to 0
                 xValueText.setText("0.00");
@@ -99,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                             xValueText.setText("" + mBeanHelper.getxValue());
                             yValueText.setText("" + mBeanHelper.getyValue());
                             zValueText.setText("" + mBeanHelper.getzValue());
+                            stepCountText.setText("" + mStepCounter.getStepCount() );
                         }
                     });
                     //Add some downtime
