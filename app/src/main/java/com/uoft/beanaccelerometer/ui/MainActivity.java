@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
     BeanHelper mBeanHelper;
     StepCounter mStepCounter;
 
-    Boolean mIsBeanOn = false;
-    final Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
                 mBeanHelper.connectBean();
 
-
                 updateUI();
-
-                mIsBeanOn = true;
-
 
             }
         });
@@ -66,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mBeanHelper.disconnectBean();
-                mIsBeanOn = false;
 
 
                 // TODO: Values not going back to 0
